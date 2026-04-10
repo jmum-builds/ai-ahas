@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your AI AHA Moment</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💥</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #08080f;
+      --bg2: #0e0e1a;
+      --bg3: #13131f;
+      --border: rgba(255,255,255,0.07);
+      --border-bright: rgba(255,255,255,0.13);
+      --text: #f0f0f8;
+      --text-muted: #8888a8;
+      --text-dim: #5a5a7a;
+      --purple: #7c6df5;
+      --purple-light: #a08af8;
+      --pink: #e96fd2;
+      --teal: #38d9c0;
+      --orange: #f4864a;
+      --yellow: #f5c542;
+      --grad-1: linear-gradient(135deg, #7c6df5 0%, #e96fd2 100%);
+      --grad-2: linear-gradient(135deg, #38d9c0 0%, #7c6df5 100%);
+      --grad-3: linear-gradient(135deg, #f4864a 0%, #f5c542 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(8,8,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--grad-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--grad-1);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.18;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 600px; height: 600px;
+      background: var(--purple);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    .hero-orb-2 {
+      width: 500px; height: 500px;
+      background: var(--pink);
+      bottom: -80px; right: -80px;
+      animation-delay: -3s;
+    }
+    .hero-orb-3 {
+      width: 400px; height: 400px;
+      background: var(--teal);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -6s;
+      opacity: 0.1;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 109, 245, 0.12);
+      border: 1px solid rgba(124, 109, 245, 0.3);
+      color: var(--purple-light);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--purple-light);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .grad-text {
+      background: var(--grad-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-2 {
+      background: var(--grad-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--grad-1);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 1px solid var(--border-bright);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 72px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: var(--grad-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 100px 24px;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--grad-1);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── PATH SECTION ── */
+    #path { background: var(--bg2); }
+
+    .path-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
+    }
+    .step-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+    .step-number {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-number::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .step-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+      line-height: 1;
+    }
+    .step-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .step-tip {
+      margin-top: 20px;
+      padding-left: 12px;
+      border-left: 2px solid rgba(124,109,245,0.5);
+      font-size: 12px;
+      color: var(--purple-light);
+      line-height: 1.55;
+    }
+
+    /* ── LESSONS BANNER ── */
+    .lessons-banner {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 48px;
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px 48px;
+    }
+    .lesson-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .lesson-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .lesson-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .lesson-text strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* ── OTHER TOOLS SECTION ── */
+    #other-tools { background: var(--bg); }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .tool-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tool-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-3px);
+    }
+    .tool-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tool-emoji { font-size: 32px; }
+    .tool-arrow {
+      font-size: 16px;
+      color: var(--text-dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .tool-card:hover .tool-arrow {
+      color: var(--purple-light);
+      transform: translate(3px, -3px);
+    }
+    .tool-name {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .tool-when {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .tool-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .tool-tag {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      width: fit-content;
+    }
+
+    /* ── WHO TO FOLLOW SECTION ── */
+    #follow { background: var(--bg2); }
+
+    .follow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 48px;
+    }
+
+    .follow-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .follow-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-3px);
+    }
+    .follow-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .follow-avatar {
+      font-size: 28px;
+    }
+    .follow-handle {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+    .follow-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .follow-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .follow-type {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      width: fit-content;
+    }
+    .follow-arrow {
+      font-size: 14px;
+      color: var(--text-dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .follow-card:hover .follow-arrow {
+      color: var(--purple-light);
+      transform: translate(2px, -2px);
+    }
+
+    /* ── BUILDS SECTION ── */
+    #builds { background: var(--bg); }
+
+    .builds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .build-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .build-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-3px);
+      background: var(--bg2);
+    }
+    .build-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .build-emoji {
+      font-size: 28px;
+    }
+    .build-arrow {
+      font-size: 18px;
+      color: var(--text-dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .build-card:hover .build-arrow {
+      color: var(--purple-light);
+      transform: translate(3px, -3px);
+    }
+    .build-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+    .build-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .build-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* special build cards (non-linked) */
+    .build-card.no-link {
+      cursor: default;
+    }
+    .build-card.no-link:hover {
+      transform: none;
+      background: var(--bg3);
+    }
+
+    /* ── PROMPTS SECTION ── */
+    #prompts { background: var(--bg2); }
+
+    .prompts-header {
+      margin-bottom: 48px;
+    }
+
+    .prompt-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .prompt-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .prompt-card:hover { border-color: var(--border-bright); }
+
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 28px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .prompt-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+    .prompt-icon-wrap {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .icon-purple { background: rgba(124,109,245,0.15); }
+    .icon-teal   { background: rgba(56,217,192,0.12); }
+    .icon-pink   { background: rgba(233,111,210,0.12); }
+    .icon-orange { background: rgba(244,134,74,0.12); }
+    .icon-yellow { background: rgba(245,197,66,0.12); }
+
+    .prompt-title-wrap {}
+    .prompt-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .prompt-subtitle {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .prompt-chevron {
+      font-size: 18px;
+      color: var(--text-dim);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .prompt-card.open .prompt-chevron {
+      transform: rotate(180deg);
+    }
+
+    .prompt-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .prompt-card.open .prompt-body {
+      max-height: 1000px;
+    }
+    .prompt-body-inner {
+      padding: 0 28px 28px;
+    }
+    .prompt-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      padding-top: 4px;
+    }
+    .prompt-template-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .prompt-template {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      position: relative;
+      white-space: pre-wrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .prompt-template em {
+      color: var(--purple-light);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(124,109,245,0.15);
+      border: 1px solid rgba(124,109,245,0.25);
+      color: var(--purple-light);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .copy-btn:hover { background: rgba(124,109,245,0.25); }
+
+    .prompt-note {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(56,217,192,0.07);
+      border: 1px solid rgba(56,217,192,0.15);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--teal);
+      line-height: 1.5;
+    }
+
+    /* ── QUICK REF ── */
+    #quickref { background: var(--bg); }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .qr-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+    .qr-phrase {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      background: var(--grad-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .qr-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── CTA SECTION ── */
+    #start {
+      background: var(--bg2);
+      text-align: center;
+    }
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .cta-emoji { font-size: 56px; display: block; margin-bottom: 32px; }
+    .cta-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .cta-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .cta-steps {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .cta-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .cta-step-num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--grad-1);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--grad-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-note {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-muted); }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px 4px;
+      background: none;
+      border: none;
+      z-index: 101;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+
+      /* Nav */
+      nav { padding: 14px 20px; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 57px; left: 0; right: 0;
+        background: rgba(8,8,15,0.97);
+        backdrop-filter: blur(24px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 8px 0 20px;
+        gap: 0;
+        z-index: 100;
+        list-style: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 14px 24px;
+        font-size: 15px;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav-cta {
+        margin: 12px 24px 0 !important;
+        text-align: center;
+        border-radius: 10px !important;
+        border-bottom: none !important;
+        padding: 14px !important;
+        font-size: 15px !important;
+      }
+
+      /* Sections */
+      section { padding: 64px 18px; }
+
+      /* Hero */
+      .hero { padding: 100px 18px 64px; }
+      .hero-sub { font-size: 17px; }
+      .hero-stats { gap: 28px; flex-wrap: wrap; justify-content: center; }
+      .stat-num { font-size: 28px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 320px; justify-content: center; }
+
+      /* Grids → single column on small screens */
+      .steps-grid,
+      .tools-grid,
+      .follow-grid,
+      .qr-grid { grid-template-columns: 1fr !important; }
+      .builds-grid { grid-template-columns: 1fr; }
+
+      /* Lessons banner */
+      .lessons-banner {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+        gap: 24px;
+      }
+
+      /* Section titles */
+      .section-title { font-size: clamp(26px, 7vw, 40px); }
+
+      /* Path header */
+      .path-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+      .path-header .section-desc { max-width: 100%; font-size: 15px; }
+
+      /* Frid-AI callout */
+      .frid-ai-callout { flex-direction: column; gap: 20px; padding: 24px 20px; }
+      .frid-ai-callout a { width: 100%; text-align: center; }
+
+      /* CTA box */
+      .cta-box { padding: 56px 18px; }
+      .cta-steps { flex-direction: column; align-items: center; gap: 8px; }
+      .cta-step { width: 100%; max-width: 280px; justify-content: flex-start; }
+
+      /* Footer */
+      footer {
+        padding: 24px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+
+      /* Prompt cards */
+      .prompt-header { padding: 18px 20px; gap: 12px; }
+      .prompt-body-inner { padding: 0 20px 20px; }
+      .prompt-icon-wrap { width: 38px; height: 38px; font-size: 17px; }
+
+      /* Gateway steps heading */
+      .gateway-intro { font-size: 13px !important; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 42px; }
+      .hero-stats { gap: 20px; }
+      .stat-num { font-size: 24px; }
+      .hero-badge { font-size: 11px; }
+      .step-card, .build-card, .tool-card, .follow-card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">AI AHA ✦</div>
+    <button class="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#path">Lessons</a></li>
+      <li><a href="#claude-path">Claude Path</a></li>
+      <li><a href="#other-tools">Other Products</a></li>
+      <li><a href="#follow">Who to Follow</a></li>
+      <li><a href="#builds">What's Possible</a></li>
+      <li><a href="#prompts">Prompts</a></li>
+      <li><a href="#start" class="nav-cta">Get Started →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Your AI Journey Starts Here</div>
+      <h1>Find your<br /><span class="grad-text">AI AHA</span><br />moment.</h1>
+      <p class="hero-sub">
+        You don't need to be technical. You just need to start.<br />
+        Here's the path — one step at a time.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://claude.ai/download" target="_blank" class="btn-primary">
+          Get Claude + CoWork →
+        </a>
+        <a href="#path" class="btn-secondary">
+          See the path →
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Coding skills needed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Things you can build</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Power prompts to steal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- THE PATH -->
+  <section id="path">
+    <div class="section-inner">
+      <div class="path-header">
+        <div>
+          <div class="section-label">The Path</div>
+          <h2 class="section-title">How to eat the elephant 🐘<br /><span class="grad-text">One bite at a time.</span></h2>
+        </div>
+        <p class="section-desc">Each step unlocks the next. Don't skip ahead — the magic is in the progression.</p>
+      </div>
+
+      <!-- LESSONS BANNER -->
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim);">Lessons from the frontline</div>
+        <div style="height: 2px; width: 48px; background: var(--grad-1); border-radius: 2px; margin-top: 8px;"></div>
+      </div>
+      <div class="lessons-banner">
+        <div class="lesson-item">
+          <div class="lesson-icon">🚢</div>
+          <div class="lesson-text">
+            <strong>Ship to learn</strong>
+            Build something imperfect and see what happens. Iteration beats planning every time.
+          </div>
+        </div>
+        <div class="lesson-item">
+          <div class="lesson-icon">🗓️</div>
+          <div class="lesson-text">
+            <strong>Block the time</strong>
+            Call it "Frid-AI time." Nothing gets built without a calendar block. An hour a week compounds fast.
+          </div>
+        </div>
+        <div class="lesson-item">
+          <div class="lesson-icon">📸</div>
+          <div class="lesson-text">
+            <strong>Screenshot when stuck</strong>
+            Drop a screenshot into Claude and ask "help unblock me" or "what do I do next?" Works every time.
+          </div>
+        </div>
+        <div class="lesson-item">
+          <div class="lesson-icon">📝</div>
+          <div class="lesson-text">
+            <strong>More context = less rework</strong>
+            The more detail you put in up front, the better the output. Think of prompts like a good brief.
+          </div>
+        </div>
+        <div class="lesson-item">
+          <div class="lesson-icon">👀</div>
+          <div class="lesson-text">
+            <strong>Watch what others build</strong>
+            Follow builders on X, watch YouTube demos, ask peers. The inspiration is everywhere once you look.
+          </div>
+        </div>
+        <div class="lesson-item">
+          <div class="lesson-icon">🔗</div>
+          <div class="lesson-text">
+            <strong>Each step is a gateway</strong>
+            Chat → Skill → Project → Scheduled Task. Every step opens the next one. Trust me — you'll feel it when it clicks.
+          </div>
+        </div>
+      </div>
+
+      <!-- FRID-AI CALLOUT -->
+      <div class="frid-ai-callout" style="margin: 40px 0 0; background: linear-gradient(135deg, rgba(124,109,245,0.1) 0%, rgba(233,111,210,0.08) 100%); border: 1px solid rgba(124,109,245,0.25); border-radius: 16px; padding: 32px 36px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="font-size: 48px; flex-shrink: 0;">🗓️</div>
+        <div style="flex: 1; min-width: 260px;">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 8px;">The habit that makes it stick</div>
+          <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Block your Frid-AI time.</div>
+          <div style="font-size: 14px; color: var(--text-muted); line-height: 1.65;">Try to dedicate an hour a week, put a rock on your calendar — I started with Fridays (Frid-AI time) — to just start playing. No agenda, no deliverable. Just exploration. An hour a week compounds faster than you think. Each time you'll learn something new which unlocks new ideas.</div>
+        </div>
+        <a href="https://calendar.google.com" target="_blank" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--grad-1); color: #fff; font-size: 13px; font-weight: 600; padding: 12px 22px; border-radius: 10px; text-decoration: none; white-space: nowrap; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Add to calendar →</a>
+      </div>
+
+      <div id="claude-path" style="margin: 56px 0 24px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0;">Getting started with Claude</div>
+        <div style="height: 2px; width: 48px; background: var(--grad-1); border-radius: 2px; margin-top: 8px;"></div>
+      </div>
+
+      <div class="steps-grid" style="grid-template-columns: repeat(4, 1fr);">
+
+        <div class="step-card">
+          <div class="step-number">Step 01</div>
+          <span class="step-icon">💬</span>
+          <div class="step-title">Start with chat</div>
+          <div class="step-desc">Just ask. Don't overthink the prompt — the only goal of step one is to get a single win.</div>
+          <div class="step-tip">Ask Claude to ask you questions before it starts. The output will be better.</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">Step 02</div>
+          <span class="step-icon">🖥️</span>
+          <div class="step-title">Download CoWork</div>
+          <div class="step-desc">Once you've had a win in chat, get the desktop app. This is where Claude goes from helpful to genuinely powerful.</div>
+          <div class="step-tip">claude.ai/download · Get Claude Pro to unlock it.</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">Step 03</div>
+          <span class="step-icon">🔌</span>
+          <div class="step-title">Connect your tools</div>
+          <div class="step-desc">Connect email, calendar, Drive, and Slack. This is what transforms Claude from a chatbot into something that actually knows your world.</div>
+          <div class="step-tip">Settings → Connectors. Takes 2 minutes. Changes everything.</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">Step 04</div>
+          <span class="step-icon">🌐</span>
+          <div class="step-title">Add the Chrome Extension</div>
+          <div class="step-desc">Use Claude directly on any webpage — no tab switching. Research, summarise, extract, and cross-reference on the fly.</div>
+          <div class="step-tip">Great for pay transparency research, job posting analysis, and pulling data from PDFs.</div>
+        </div>
+
+      </div>
+
+      <!-- GATEWAY STEPS -->
+      <div style="margin: 56px 0 24px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim);">Claude level up — when you're ready</div>
+        <div style="height: 2px; width: 48px; background: var(--grad-2); border-radius: 2px; margin-top: 8px;"></div>
+        <p style="font-size: 14px; color: var(--text-muted); margin-top: 12px; max-width: 580px; line-height: 1.6;">These aren't required steps — they're gateways. Each one unlocks a new level of what Claude can do for you. Come back to them once you've built a habit with the basics.</p>
+      </div>
+
+      <div class="steps-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+
+        <div class="step-card" style="border-color: rgba(56,217,192,0.2);">
+          <div class="step-number" style="color: var(--teal);">Gateway A</div>
+          <span class="step-icon">🧩</span>
+          <div class="step-title">Use Skills</div>
+          <div class="step-desc">Pre-built modes for things you do repeatedly. Set it up once — meeting prep, email drafts, slide decks — and Claude runs it on demand, every time.</div>
+          <div class="step-tip" style="border-left-color: rgba(56,217,192,0.6); color: var(--teal);">Skills = how Claude behaves. Type "/" in CoWork to browse.</div>
+        </div>
+
+        <div class="step-card" style="border-color: rgba(56,217,192,0.2);">
+          <div class="step-number" style="color: var(--teal);">Gateway B</div>
+          <span class="step-icon">📁</span>
+          <div class="step-title">Create Projects</div>
+          <div class="step-desc">Persistent memory and shared context — no re-explaining every session. Keeps Claude focused on that topic only so answers stay relevant and don't drift. Invite teammates in and it becomes a living workspace.</div>
+          <div class="step-tip" style="border-left-color: rgba(56,217,192,0.6); color: var(--teal);">Projects = what Claude remembers. Like a Drive folder Claude has read cover to cover.</div>
+        </div>
+
+        <div class="step-card" style="border-color: rgba(56,217,192,0.2);">
+          <div class="step-number" style="color: var(--teal);">Gateway C</div>
+          <span class="step-icon">⏰</span>
+          <div class="step-title">Scheduled Tasks</div>
+          <div class="step-desc">The graduation step. Automate recurring work — morning briefings, data pulls, Slack digests — so it lands in your inbox without lifting a finger.</div>
+          <div class="step-tip" style="border-left-color: rgba(56,217,192,0.6); color: var(--teal);">Start simple: a morning email with your meetings and prep context.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- OTHER TOOLS -->
+  <section id="other-tools">
+    <div class="section-inner">
+      <div class="section-label">Beyond Claude</div>
+      <h2 class="section-title">Other products worth<br /><span class="grad-text">knowing about.</span></h2>
+      <p class="section-desc" style="margin-top:12px;">Claude is an easy home base. But depending on what you're building, these products are worth trying on too.</p>
+
+      <div class="tools-grid">
+
+        <a href="https://replit.com" target="_blank" class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-emoji">🔧</span>
+            <span class="tool-arrow">↗</span>
+          </div>
+          <div class="tool-name">Replit</div>
+          <div class="tool-when">Best for: shipping apps fast</div>
+          <div class="tool-desc">Build and host web tools without writing a line of code. Perfect for anything interactive — calculators, portals, form builders — or anything that needs to live at a shareable link. You describe it; the AI builds and hosts it.</div>
+          <div class="tool-tag">No-code friendly</div>
+        </a>
+
+        <a href="https://cursor.com" target="_blank" class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-emoji">🗄️</span>
+            <span class="tool-arrow">↗</span>
+          </div>
+          <div class="tool-name">Cursor</div>
+          <div class="tool-when">Best for: working with your own data</div>
+          <div class="tool-desc">If you have a corpus of data — a spreadsheet, a database, a folder of files — Cursor lets you ask questions of it and build on top of it. Less drag-and-drop, more powerful. Best when you have a technical colleague to pair with for setup.</div>
+          <div class="tool-tag">Data-heavy use cases</div>
+        </a>
+
+        <a href="https://gamma.app" target="_blank" class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-emoji">📊</span>
+            <span class="tool-arrow">↗</span>
+          </div>
+          <div class="tool-name">Gamma</div>
+          <div class="tool-when">Best for: slides and decks</div>
+          <div class="tool-desc">If you live in PowerPoint, Gamma is a serious upgrade. Describe what you want, and it builds a full, beautifully designed slide deck. Great for board updates, team presentations, or any time you're starting a deck from scratch.</div>
+          <div class="tool-tag">AI-native presentations</div>
+        </a>
+
+        <a href="https://www.photalabs.ai" target="_blank" class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-emoji">📸</span>
+            <span class="tool-arrow">↗</span>
+          </div>
+          <div class="tool-name">Photalabs</div>
+          <div class="tool-when">Best for: AI-powered photo editing</div>
+          <div class="tool-desc">AI photo editing and enhancement that actually works — great for headshots, team photos, social content, and visual assets without needing a designer or Photoshop skills.</div>
+          <div class="tool-tag">Creative &amp; visual</div>
+        </a>
+
+      </div>
+
+      <!-- RAW DATA CALLOUT -->
+      <div style="margin-top: 32px; background: linear-gradient(135deg, rgba(124,109,245,0.1) 0%, rgba(233,111,210,0.08) 100%); border: 1px solid rgba(124,109,245,0.25); border-radius: 16px; padding: 32px 36px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="font-size: 48px; flex-shrink: 0;">🗂️</div>
+        <div style="flex: 1; min-width: 260px;">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 8px;">Pro tip</div>
+          <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Don't have raw data to play with?</div>
+          <div style="font-size: 14px; color: var(--text-muted); line-height: 1.65;">Just ask Claude to build you a dummy dataset. Tell it what fields you need, how many rows, and what it's for — it'll generate a realistic file you can use to test any data heavy use case straight away.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHO TO FOLLOW -->
+  <section id="follow">
+    <div class="section-inner">
+      <div class="section-label">Who to Follow</div>
+      <h2 class="section-title">Learn from people<br /><span class="grad-text">already building.</span></h2>
+      <p class="section-desc" style="margin-top:12px;">Here are some personal favorites open sourcing as they build on X, YouTube, and other social media platforms.</p>
+
+      <div class="follow-grid">
+
+        <a href="https://x.com/oliviamoore" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">👩‍💻</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">@oliviamoore · X</div>
+          <div class="follow-name">Olivia Moore</div>
+          <div class="follow-desc">Consumer AI investor at a16z. Covers what's happening in AI products — approachable, non-technical, genuinely useful. A great first follow.</div>
+          <div class="follow-type">Consumer AI</div>
+        </a>
+
+        <a href="https://x.com/karpathy" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">🧠</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">@karpathy · X</div>
+          <div class="follow-name">Andrej Karpathy</div>
+          <div class="follow-desc">Ex-OpenAI, ex-Tesla AI. Explains how AI actually works better than almost anyone. His YouTube explainers are the best in the space — even non-technical people get it.</div>
+          <div class="follow-type">AI Education</div>
+        </a>
+
+        <a href="https://www.lennysnewsletter.com" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">📬</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">Newsletter + Podcast</div>
+          <div class="follow-name">Lenny's Newsletter</div>
+          <div class="follow-desc">Product and growth strategy with a growing lens on AI tools for operators. Practical, well-researched, easy to apply. Great for non-engineers thinking about what to build next.</div>
+          <div class="follow-type">Operators</div>
+        </a>
+
+        <a href="https://www.dwarkeshpatel.com/podcast" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">🎙️</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">Podcast</div>
+          <div class="follow-name">Dwarkesh Podcast</div>
+          <div class="follow-desc">Long-form conversations with the people actually building AI — researchers, founders, policymakers. Harder but worth it if you want to understand where things are heading.</div>
+          <div class="follow-type">Deep Dives</div>
+        </a>
+
+        <a href="https://www.youtube.com/@howiai" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">▶️</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">YouTube + Podcast</div>
+          <div class="follow-name">How I AI</div>
+          <div class="follow-desc">Real people showing how they actually use AI in their work. Less hype, more demo. A great way to steal workflows you'd never have thought of yourself.</div>
+          <div class="follow-type">Workflows</div>
+        </a>
+
+        <a href="https://x.com/ericglyman" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">⚡</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">@ericglyman · X</div>
+          <div class="follow-name">Eric Glyman</div>
+          <div class="follow-desc">CEO of Ramp. Shares how they use AI to transform operations from the inside — one of the best real-world examples of an AI-native company in practice. Worth following if you want to see what's actually possible at scale.</div>
+          <div class="follow-type">AI-Native Operator</div>
+        </a>
+
+        <a href="https://x.com/borispower" target="_blank" class="follow-card">
+          <div class="follow-card-top">
+            <span class="follow-avatar">🤖</span>
+            <span class="follow-arrow">↗</span>
+          </div>
+          <div class="follow-handle">@borispower · X</div>
+          <div class="follow-name">Boris Power</div>
+          <div class="follow-desc">Member of technical staff at Anthropic. Shares what Claude can actually do — real examples, real use cases. One of the best follows if you want to see what's possible before it hits the docs.</div>
+          <div class="follow-type">Anthropic · Claude</div>
+        </a>
+
+        <div class="follow-card" style="cursor:default; border-style: dashed;">
+          <div class="follow-card-top">
+            <span class="follow-avatar">𝕏</span>
+          </div>
+          <div class="follow-handle">X / Twitter broadly</div>
+          <div class="follow-name">Follow the builders</div>
+          <div class="follow-desc">The fastest AI news and experiments happen on X first. Follow anyone you hear doing something cool, search "Claude" or "AI workflow" and see what surfaces. Ask your peers who they follow.</div>
+          <div class="follow-type">Community</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHAT'S POSSIBLE -->
+  <section id="builds">
+    <div class="section-inner">
+      <div class="section-label">What's Possible</div>
+      <h2 class="section-title">Real things <span class="grad-text-2">real people</span> built.</h2>
+      <p class="section-desc" style="margin-top:12px;">These were all built by real people, in HR use cases, with no coding background — starting from zero. This is your proof of concept.</p>
+
+      <div class="builds-grid">
+
+        <a href="https://karpathy.ai" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">🧠</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Inspiration</div>
+          <div class="build-title">Andrej Karpathy's LLM Wiki</div>
+          <div class="build-desc">Andrej built a personal knowledge wiki powered by LLMs — a living, searchable brain for everything he's read and learned. Proof that AI can be your long-term memory, not just a one-off tool.</div>
+        </a>
+
+        <a href="https://www.lennysnewsletter.com/p/how-openclaw-changed-my-life-claire-vo" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">🦞</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Must Read</div>
+          <div class="build-title">How OpenClaw Changed My Life — Claire Vo</div>
+          <div class="build-desc">Product leader Claire Vo goes from skeptic to true believer. A brilliant, honest account of what it actually feels like when AI clicks — and what OpenClaw (a personal AI agent setup) can do for your daily work. One of the best pieces written on this.</div>
+        </a>
+
+        <div class="build-card no-link">
+          <div class="build-card-top">
+            <span class="build-emoji">📅</span>
+          </div>
+          <div class="build-tag">Automation</div>
+          <div class="build-title">Calendar Scheduling Skill</div>
+          <div class="build-desc">A skill that finds available meeting slots across multiple a16z team members, checks calendars in real time, and surfaces options — without the back-and-forth email chain. Just ask "find a time that works."</div>
+        </div>
+
+        <div class="build-card no-link">
+          <div class="build-card-top">
+            <span class="build-emoji">📋</span>
+          </div>
+          <div class="build-tag">Automation</div>
+          <div class="build-title">Daily Meeting Prep Brief</div>
+          <div class="build-desc">A scheduled task that sends a morning email: your day's meetings, external attendee context, last email touchpoints. Runs itself every day.</div>
+        </div>
+
+        <div class="build-card no-link">
+          <div class="build-card-top">
+            <span class="build-emoji">📊</span>
+          </div>
+          <div class="build-tag">Automation</div>
+          <div class="build-title">HR Benchmarking Tracker</div>
+          <div class="build-desc">A scheduled task that pulls HR data points, adds them to a spreadsheet, and sends a Slack message — all without opening a laptop.</div>
+        </div>
+
+        <div class="build-card no-link">
+          <div class="build-card-top">
+            <span class="build-emoji">📝</span>
+          </div>
+          <div class="build-tag">Workflow</div>
+          <div class="build-title">Immigration Letter Builder</div>
+          <div class="build-desc">Preloaded templates, company letterhead, and dynamic fields — letters generated in seconds, not hours.</div>
+        </div>
+
+        <a href="https://therealjmum.github.io/time-to-play-ai/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">🎮</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Beginner</div>
+          <div class="build-title">Time to Play AI</div>
+          <div class="build-desc">A starter guide for anyone new to AI — where to begin, what to try, and how to get unstuck.</div>
+        </a>
+
+        <a href="https://therealjmum.github.io/AI-for-HR/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">👥</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">HR</div>
+          <div class="build-title">AI for HR</div>
+          <div class="build-desc">Practical AI examples specifically for HR and People leaders — use cases, prompts, and inspiration.</div>
+        </a>
+
+        <a href="https://therealjmum.github.io/claude-for-the-people/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">🙋</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Accessible</div>
+          <div class="build-title">Claude for the People</div>
+          <div class="build-desc">Lay-person examples of Claude in action. Built to show non-technical folks what's possible.</div>
+        </a>
+
+        <a href="https://therealjmum.github.io/people-resources/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">📚</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Resources</div>
+          <div class="build-title">Jmum Reads</div>
+          <div class="build-desc">A curated reading list of People & HR resources — books, articles, and tools worth your time.</div>
+        </a>
+
+        <a href="https://therealjmum.github.io/comp-calc/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">💰</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Tool</div>
+          <div class="build-title">Total Comp Generator</div>
+          <div class="build-desc">An interactive comp statement builder for employees — input their package, get a clear breakdown.</div>
+        </a>
+
+        <a href="https://therealjmum.github.io/claims-analyzer/" target="_blank" class="build-card">
+          <div class="build-card-top">
+            <span class="build-emoji">🏥</span>
+            <span class="build-arrow">↗</span>
+          </div>
+          <div class="build-tag">Tool</div>
+          <div class="build-title">US Medical Cost Analyser</div>
+          <div class="build-desc">Helps employees make sense of healthcare costs — built from real benefits benchmarking data.</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BUILD THIS WEEK BANNER -->
+  <section style="background: var(--bg2); padding: 0 24px;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 64px 0;">
+      <div style="background: linear-gradient(135deg, rgba(124,109,245,0.12) 0%, rgba(56,217,192,0.08) 100%); border: 1px solid rgba(124,109,245,0.25); border-radius: 20px; padding: 56px 64px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 16px;">Your challenge</div>
+        <div style="font-size: clamp(32px, 5vw, 56px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px;">What are you going to<br /><span style="background: linear-gradient(135deg, #7c6df5, #38d9c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">build this week?</span></div>
+        <p style="font-size: 17px; color: var(--text-muted); max-width: 480px; margin: 0 auto; line-height: 1.65;">Start with one thing. One task that's been sitting on your list. Give it to Claude and see what happens. Below are the prompts to get you there.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROMPTS -->
+  <section id="prompts">
+    <div class="section-inner">
+      <div class="prompts-header">
+        <div class="section-label">Power Prompts</div>
+        <h2 class="section-title">Steal these.<br /><span class="grad-text">They work.</span></h2>
+        <p class="section-desc" style="margin-top:12px;">Copy, fill in the brackets, and go. High-leverage prompts worth having in your back pocket.</p>
+      </div>
+
+      <div class="prompt-cards">
+
+        <!-- 1 -->
+        <div class="prompt-card" onclick="togglePrompt(this)">
+          <div class="prompt-header">
+            <div class="prompt-header-left">
+              <div class="prompt-icon-wrap icon-purple">🔎</div>
+              <div class="prompt-title-wrap">
+                <div class="prompt-title">Find my biggest time sinks and automate them</div>
+                <div class="prompt-subtitle">Efficiency Audit · Requires Calendar + Gmail access</div>
+              </div>
+            </div>
+            <span class="prompt-chevron">⌄</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-body-inner">
+              <p class="prompt-description">Give Claude access to your calendar and email history, then ask it to surface the highest-leverage wins. Great starting point if you're not sure where to begin.</p>
+              <div class="prompt-template-label">Template — copy and fill in</div>
+              <div class="prompt-template">
+I am a <em>[your role — e.g. VP People / HR Business Partner / Talent Lead]</em>. Please look at my last 500 emails and my last 4 weeks of calendar.
+
+I want you to identify 2–3 high-leverage areas where we can automate, delegate, or significantly reduce the time I spend.
+
+For each one: name the pattern you spotted, estimate the time it's costing me, and suggest a specific way Claude could help.
+                <button class="copy-btn" onclick="copyPrompt(event, this)">Copy</button>
+              </div>
+              <div class="prompt-note">💡 Works best inside a Claude Project with Calendar + Gmail connected.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="prompt-card" onclick="togglePrompt(this)">
+          <div class="prompt-header">
+            <div class="prompt-header-left">
+              <div class="prompt-icon-wrap icon-teal">🏗️</div>
+              <div class="prompt-title-wrap">
+                <div class="prompt-title">Help me design a solution from scratch</div>
+                <div class="prompt-subtitle">Build Something New · Claude asks before building</div>
+              </div>
+            </div>
+            <span class="prompt-chevron">⌄</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-body-inner">
+              <p class="prompt-description">When you have a problem but not a solution yet. Claude asks clarifying questions before jumping in — which means you end up with something that actually fits.</p>
+              <div class="prompt-template-label">Template — copy and fill in</div>
+              <div class="prompt-template">
+I want to build <em>[describe what you want — e.g. an onboarding program / a manager calibration process / a recruiting scorecard]</em> to solve <em>[the actual problem — e.g. inconsistent new hire experiences / managers avoiding hard conversations]</em>.
+
+Before you start, ask me 5–7 questions to fully understand the context, constraints, and what success looks like.
+
+Once you have enough, build the solution with me.
+                <button class="copy-btn" onclick="copyPrompt(event, this)">Copy</button>
+              </div>
+              <div class="prompt-note">💡 The key is asking Claude to ask YOU questions first — forces it to understand before solving.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="prompt-card" onclick="togglePrompt(this)">
+          <div class="prompt-header">
+            <div class="prompt-header-left">
+              <div class="prompt-icon-wrap icon-pink">🤖</div>
+              <div class="prompt-title-wrap">
+                <div class="prompt-title">Help me spec and build an AI agent</div>
+                <div class="prompt-subtitle">Agent Design · Turns rough idea into a full spec</div>
+              </div>
+            </div>
+            <span class="prompt-chevron">⌄</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-body-inner">
+              <p class="prompt-description">For when you want to build something more sophisticated — a recurring workflow, an automated brief, a custom assistant. This turns your rough idea into a full spec.</p>
+              <div class="prompt-template-label">Template — copy and fill in</div>
+              <div class="prompt-template">
+I want to build an AI agent.
+
+My goal: <em>[what you want it to do — e.g. "prepare a meeting brief every morning by checking my calendar and researching external attendees"]</em>
+
+The user will ask things like: <em>[5 realistic examples — e.g. "What's on today?", "Who am I meeting externally?"]</em>
+
+The agent should have access to: <em>[e.g. web search / Gmail / Google Calendar]</em>
+
+It must always: <em>[non-negotiables — e.g. "summarise in under 300 words", "flag external meetings separately"]</em>
+
+It must never: <em>[hard limits — e.g. "share personal employee data", "make commitments on my behalf"]</em>
+
+Please turn this into:
+1. A clear agent spec
+2. A system prompt I can use
+3. A tool list
+4. A first version roadmap
+5. 10 test cases to validate it's working
+                <button class="copy-btn" onclick="copyPrompt(event, this)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="prompt-card" onclick="togglePrompt(this)">
+          <div class="prompt-header">
+            <div class="prompt-header-left">
+              <div class="prompt-icon-wrap icon-orange">🎯</div>
+              <div class="prompt-title-wrap">
+                <div class="prompt-title">Pressure-test my People strategy</div>
+                <div class="prompt-subtitle">HR Strategy · Claude as your senior advisor</div>
+              </div>
+            </div>
+            <span class="prompt-chevron">⌄</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-body-inner">
+              <p class="prompt-description">Use Claude as a thinking partner before a board prep, leadership offsite, or big People initiative. Faster and more candid than most internal feedback.</p>
+              <div class="prompt-template-label">Template — copy and fill in</div>
+              <div class="prompt-template">
+Act as a senior People advisor with experience scaling HR functions at high-growth tech companies.
+
+I'm going to share our People strategy for <em>[year/initiative]</em>. I want you to:
+1. Summarise what you think we're actually prioritising
+2. Identify the 2–3 biggest risks or gaps
+3. Flag any assumptions that might not hold
+4. Suggest one thing we haven't thought of that's worth considering
+
+Here's the strategy: <em>[paste or describe]</em>
+                <button class="copy-btn" onclick="copyPrompt(event, this)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="prompt-card" onclick="togglePrompt(this)">
+          <div class="prompt-header">
+            <div class="prompt-header-left">
+              <div class="prompt-icon-wrap icon-yellow">📈</div>
+              <div class="prompt-title-wrap">
+                <div class="prompt-title">What are best-in-class companies doing on X?</div>
+                <div class="prompt-subtitle">Benchmark Research · Skip hours of manual searching</div>
+              </div>
+            </div>
+            <span class="prompt-chevron">⌄</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-body-inner">
+              <p class="prompt-description">Skip the hours of research. Claude can synthesise what leading companies do on almost any HR topic — and apply it to your context.</p>
+              <div class="prompt-template-label">Template — copy and fill in</div>
+              <div class="prompt-template">
+Research what best-in-class companies at <em>[stage — e.g. Series B / 200–500 employees / enterprise]</em> do around <em>[topic — e.g. manager development / promotion criteria / onboarding for senior hires]</em>.
+
+Give me:
+1. 3–5 things the best companies do differently
+2. The most common mistakes
+3. A recommendation for what we should adopt given we're <em>[brief description — e.g. a 150-person cybersecurity company scaling from 3 to 5 offices]</em>
+                <button class="copy-btn" onclick="copyPrompt(event, this)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- QUICK REF -->
+  <section id="quickref">
+    <div class="section-inner">
+      <div class="section-label">Quick Reference</div>
+      <h2 class="section-title">Useful phrases<br /><span class="grad-text">mid-conversation.</span></h2>
+      <p class="section-desc" style="margin-top:12px;">Drop these in whenever you need to steer Claude. No new prompt required.</p>
+
+      <div class="qr-grid">
+
+        <!-- FEATURED phrase -->
+        <div class="qr-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(124,109,245,0.12) 0%, rgba(233,111,210,0.08) 100%); border-color: rgba(124,109,245,0.3); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px;">
+          <div style="font-size: 36px; flex-shrink: 0;">⭐</div>
+          <div style="flex: 1; min-width: 200px;">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 6px;">The single best prompt habit</div>
+            <div class="qr-phrase" style="font-size: 17px; margin-bottom: 6px;">"Ask me questions along the way"</div>
+            <div class="qr-desc">Add this to any prompt. It tells Claude to pause and check in before assuming — which means less rework, better output, and a result that actually fits your situation. The difference between a generic answer and exactly what you needed.</div>
+          </div>
+        </div>
+
+        <div class="qr-card">
+          <div class="qr-phrase">"Be more concise"</div>
+          <div class="qr-desc">Shorten any response. "Cut this by half" or "Key points only" also work.</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"More formal / casual"</div>
+          <div class="qr-desc">Adjust tone mid-conversation. "Make this less corporate" or "More professional."</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"Give me options"</div>
+          <div class="qr-desc">Ask for multiple versions. "Write 3 subject line options" or "Two versions: soft and direct."</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"What am I missing?"</div>
+          <div class="qr-desc">Great for stress-testing. Claude surfaces gaps — missing context, unclear expectations, legal risks.</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"Explain this simply"</div>
+          <div class="qr-desc">If you get a complex response: "Plain English please" or "Give me the TL;DR."</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"Read this as…"</div>
+          <div class="qr-desc">Perspective-taking. "…as a new manager" or "…as a nervous employee." Forces a different lens.</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"Flag the risks"</div>
+          <div class="qr-desc">"What are the potential downsides?" — especially useful before making an HR decision.</div>
+        </div>
+        <div class="qr-card">
+          <div class="qr-phrase">"Help unblock me"</div>
+          <div class="qr-desc">Screenshot whatever you're stuck on and drop it in. Ask "what do I do next?" Works every time.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section id="start">
+    <div class="cta-box">
+      <span class="cta-emoji">⚡</span>
+      <h2 class="cta-title">Your AHA moment<br /><span class="grad-text">is one download away.</span></h2>
+      <p class="cta-desc">You've seen the path. You've seen what's possible. Now it's your turn to build something.</p>
+      <div class="hero-ctas">
+        <a href="https://claude.ai/download" target="_blank" class="btn-primary">
+          Get Claude + CoWork →
+        </a>
+        <a href="https://claude.ai" target="_blank" class="btn-secondary">
+          Try Claude in browser →
+        </a>
+      </div>
+      <div class="cta-steps">
+        <div class="cta-step">
+          <div class="cta-step-num">1</div>
+          Get Claude Pro
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">2</div>
+          Connect your tools
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">3</div>
+          Ask it anything
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">4</div>
+          Build something
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">5</div>
+          Share what you made
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">AI AHA ✦</div>
+    <div class="footer-note">Built with Claude · Inspired by a real journey</div>
+    <div class="footer-links">
+      <a href="#path">The Path</a>
+      <a href="#other-tools">Other Products</a>
+      <a href="#builds">What's Possible</a>
+      <a href="#prompts">Prompts</a>
+      <a href="https://claude.ai/download" target="_blank">Get Claude</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const links = document.getElementById('nav-links');
+      const burger = document.querySelector('.hamburger');
+      links.classList.toggle('open');
+      burger.classList.toggle('open');
+    }
+
+    // Close nav when a link is clicked
+    document.querySelectorAll('#nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('open');
+        document.querySelector('.hamburger').classList.remove('open');
+      });
+    });
+
+    function togglePrompt(card) {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.prompt-card.open').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    }
+
+    function copyPrompt(e, btn) {
+      e.stopPropagation();
+      const template = btn.closest('.prompt-template');
+      const text = template.innerText.replace('Copy', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.step-card, .build-card, .tool-card, .follow-card, .prompt-card, .qr-card, .lesson-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
